@@ -25,7 +25,7 @@ function App() {
       <h3 className="m-3 d-flex justify-content-center">
       React JS with Web api Demo</h3>
       <h5 className="m-3 d-flex justify-content-center">
-      Employee Management Portal</h5>
+      Student Management Portal</h5>
 
       <Navigation/>
 

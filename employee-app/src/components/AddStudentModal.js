@@ -80,6 +80,7 @@ export class AddStudentModal extends Component {
         this.setState({
           students: response.data
         });
+        alert("Student added successfully!");
         //console.log(response.data);
       })
       .catch(e => {
@@ -160,7 +161,7 @@ export class AddStudentModal extends Component {
                   <Form.Group controlId="ContactNo">
                     <Form.Label>ContactNo</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="number"
                       name="ContactNo"
                       required
                       placeholder="ContactNo"
@@ -171,7 +172,7 @@ export class AddStudentModal extends Component {
                   <Form.Group controlId="EmailAddress">
                     <Form.Label>EmailAddress</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="email"
                       name="EmailAddress"
                       required
                       placeholder="EmailAddress"

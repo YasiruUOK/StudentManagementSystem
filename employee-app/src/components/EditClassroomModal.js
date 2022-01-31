@@ -29,6 +29,7 @@ export class EditClassRoomModal extends Component{
             this.setState({
                 classrooms: response.data
             });
+            alert("Classroom Edited successfully!");
             //console.log(response.data);
           })
           .catch(e => {

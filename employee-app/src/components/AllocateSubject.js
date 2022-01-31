@@ -61,7 +61,9 @@ export default class AllocateSubject extends Component {
                     this.setState({
                         //subjects: response.data
                     });
-                    this.getTeacherNameList();
+                    var selectedTeacherID = document.getElementById("teacherList").value;
+                    this.getAllocatedSubjectList(selectedTeacherID);
+                    //this.getTeacherNameList();
                     //console.log(response.data);
                 })
                 .catch(e => {
@@ -110,8 +112,6 @@ export default class AllocateSubject extends Component {
           subjectID: parseInt(document.getElementById("subjectList").value),
           teacherID: parseInt(document.getElementById("teacherList").value)
         };
-        console.log("subjectID "+data.subjectID);
-        console.log("teacherID "+data.teacherID);
         AllocateSubjectDataService.create(data)
           .then(response => {
             this.setState({
@@ -189,30 +189,30 @@ export default class AllocateSubject extends Component {
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Allowcated subjectID</th>
-                            <th>subjectID</th>
+                            {/* <th>Allowcated subjectID</th>
+                            <th>subjectID</th> */}
                             <th>Subject Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         {subjects.map(subjects =>
                             <tr key={subjects.allocateSubjectID}>
-                                <td>{subjects.allocateSubjectID}</td>
-                                <td>{subjects.subjectID}</td>
+                                {/* <td>{subjects.allocateSubjectID}</td>
+                                <td>{subjects.subjectID}</td> */}
                                 <td>{subjects.subjectName}</td>
                                 <td>
                                     <ButtonToolbar>
-                                        <Button
+                                        {/* <Button
                                             className="mr-2" variant="info"
                                             onClick={() => this.setState({ editModalShow: true, subjectid: subjects.subjectID, subjectname: subjects.subjectName })}
                                         >
                                             Edit
-                                        </Button>
+                                        </Button> */}
 
                                         <Button className="mr-2"
                                             onClick={() => this.deleteAllocateSubjectDataService(subjects.allocateSubjectID)}
                                             variant="danger"
-                                        >Delete</Button>
+                                        >Deallocate</Button>
 
                                         <EditSubjectModal
                                             show={this.state.editModalShow}

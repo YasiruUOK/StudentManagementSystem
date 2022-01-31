@@ -32,6 +32,7 @@ export class EditTeacherModal extends Component{
             this.setState({
                 teachers: response.data
             });
+            alert("Teacher edited successfully!");
             //console.log(response.data);
           })
           .catch(e => {
@@ -119,7 +120,7 @@ onClick={this.snackbarClose}
               <Form.Group controlId="contactNo">
               <Form.Label>ContactNo</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 name="contactno"
                 required
                 defaultValue = {this.props.contactno}
@@ -130,7 +131,7 @@ onClick={this.snackbarClose}
               <Form.Group controlId="emailAddress">
               <Form.Label>EmailAddress</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 name="emailaddress"
                 required
                 defaultValue = {this.props.emailaddress}

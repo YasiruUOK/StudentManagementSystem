@@ -44,6 +44,7 @@ export default class Student extends Component {
                 //students: response.data
             });
             //console.log(response.data);
+            this.refreshList();
           })
           .catch(e => {
             console.log(e);
@@ -53,38 +54,38 @@ export default class Student extends Component {
     render(){
         
         const {students, studentid, firstname, lastname, contactperson, contactno, emailaddress, dobstring} = this.state;
-        let addModalClose =() => this.setState({addModalShow:false});
-        let editModalClose =() => this.setState({editModalShow:false});
+        let addModalClose =() => {this.setState({addModalShow:false})
+        this.refreshList();};
+        let editModalClose =() => {this.setState({editModalShow:false})
+        this.refreshList();};
     
             return(
                 <div>
                 <Table className="mt-4" striped bordered hover size="sm">
                 <thead>
                     <tr>
-                        <th>studentID</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>contactPerson</th>
-                        <th>contactNo</th>
-                        <th>emailAddress</th>
-                        <th>dateOfbirth</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact Person</th>
+                        <th>Contact No</th>
+                        <th>Email Address</th>
+                        <th>Age</th>
                     </tr>
                 </thead>
                 <tbody>
                     {students.map(students=>
-                       <tr key ={students.studentID}>
-                        <td>{students.studentID}</td> 
+                       <tr key ={students.studentID}> 
                         <td>{students.firstName}</td>
                         <td>{students.lastName}</td>
                         <td>{students.contactPerson}</td>
                         <td>{students.contactNo}</td>
                         <td>{students.emailAddress}</td>
-                        <td>{students.dobString}</td>
+                        <td>{students.ageYearsIntRound}</td>
                        <td>
     <ButtonToolbar>
     <Button
     className="mr-2" variant="info"
-    onClick= {()=> this.setState({editModalShow:true, studentid:students.studentID, firstname:students.firstName, lastname:students.lastName, contactperson:students.contactPerson, contactno:students.contactNo, emailaddress:students.emailAddress, dobstring:students.dobString})}
+    onClick= {()=> this.setState({editModalShow:true, studentid:students.studentID, firstname:students.firstName, lastname:students.lastName, contactperson:students.contactPerson, contactno:students.contactNo, emailaddress:students.emailAddress, dobstring:students.dobString, classroomID:students.classroomID,classroomName:students.classroomName})}
     >
         Edit
     </Button>

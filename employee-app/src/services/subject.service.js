@@ -25,9 +25,9 @@ class SubjectDataService {
     });
   }
 
-  delete(studentID) {
+  delete(subjectID) {
     //console.log(studentID);
-    return http.delete("/Subject/"+studentID
+    return http.delete("/Subject/"+subjectID
     );
   }
 

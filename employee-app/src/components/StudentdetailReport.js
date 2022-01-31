@@ -9,7 +9,7 @@ export default class StudentdetailReport extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { students: [], addModalShow: false, editModalShow: false, existingStudentList: [], existingStudentDetails: [], existingSubjectList: [], subjectName: props.existingStudentDetails, teacherName: props.existingStudentDetails, subjectsAndTeachersDetailsOfClassID: props.existingStudentDetails }
+        this.state = { students: [], addModalShow: false, editModalShow: false, existingStudentList: [], existingStudentDetails: [] }
         this.refreshList();
         this.getStudentNameList();
         this.existingStudentDetails = [];
@@ -29,7 +29,53 @@ export default class StudentdetailReport extends Component {
                 document.getElementById('emailAddressInput').value = response.data[0].emailAddress;
                 document.getElementById('contactNumberInput').value = response.data[0].contactNo;
                 document.getElementById('dobInput').value = response.data[0].dobString;
-                console.log("response.data[0].classroomID " + response.data[0].classroomID);
+                // console.log("response.data[0].classroomID " + response.data[0].classroomID);
+                setTimeout(() => {  
+                    SubjectsAndTeachersDetailsOfClassService.get(response.data[0].classroomID)
+                    .then(subjectResponse => {
+                        let count = 0;
+                        var rowCount = document.getElementById("myTable").rows.length;
+                        for (var i = rowCount - 1; i > 0; i--) {
+                            document.getElementById("myTable").deleteRow(i);
+                        }
+                        for (let subjectName in subjectResponse.data) {
+
+                            var table = document.getElementById("myTable");
+                            var row = table.insertRow(1);
+                            var cell1 = row.insertCell(0);
+                            var cell2 = row.insertCell(1);
+                            cell1.innerHTML = subjectResponse.data[count].subjectName;
+                            cell2.innerHTML = subjectResponse.data[count].teacherName;
+                            count++;
+                        }
+
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    });
+                 }, 500);
+                // SubjectsAndTeachersDetailsOfClassService.get(response.data[0].classroomID)
+                //     .then(subjectResponse => {
+                //         let count = 0;
+                //         var rowCount = document.getElementById("myTable").rows.length;
+                //         for (var i = rowCount - 1; i > 0; i--) {
+                //             document.getElementById("myTable").deleteRow(i);
+                //         }
+                //         for (let subjectName in subjectResponse.data) {
+
+                //             var table = document.getElementById("myTable");
+                //             var row = table.insertRow(1);
+                //             var cell1 = row.insertCell(0);
+                //             var cell2 = row.insertCell(1);
+                //             cell1.innerHTML = subjectResponse.data[count].subjectName;
+                //             cell2.innerHTML = subjectResponse.data[count].teacherName;
+                //             count++;
+                //         }
+
+                //     })
+                //     .catch(e => {
+                //         console.log(e);
+                //     });
 
             })
             .catch(e => {
@@ -94,8 +140,6 @@ export default class StudentdetailReport extends Component {
                             document.getElementById("myTable").deleteRow(i);
                         }
                         for (let subjectName in subjectResponse.data) {
-
-                            console.log(subjectResponse.data[count]);
 
                             var table = document.getElementById("myTable");
                             var row = table.insertRow(1);

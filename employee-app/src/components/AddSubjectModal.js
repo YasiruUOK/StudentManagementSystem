@@ -31,6 +31,7 @@ export class AddSubjectModal extends Component {
             this.setState({
                 students: response.data
             });
+            alert("Subject added successfully!");
           })
           .catch(e => {
             console.log(e);

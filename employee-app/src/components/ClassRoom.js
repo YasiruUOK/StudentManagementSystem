@@ -53,22 +53,26 @@ export default class ClassRoom extends Component {
     render(){
         
         const {classrooms, classroomid, classroomname} = this.state;
-        let addModalClose =() => this.setState({addModalShow:false});
-        let editModalClose =() => this.setState({editModalShow:false});
+        let addModalClose =() => {this.setState({addModalShow:false})
+        this.refreshList();
+        };
+        let editModalClose =() => {this.setState({editModalShow:false})
+        this.refreshList();    
+        };
     
             return(
                 <div>
                 <Table className="mt-4" striped bordered hover size="sm">
                 <thead>
                     <tr>
-                        <th>classroomID</th>
+                        {/* <th>classroomID</th> */}
                         <th>Classroom Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     {classrooms.map(classrooms=>
                        <tr key ={classrooms.classroomID}>
-                        <td>{classrooms.classroomID}</td> 
+                        {/* <td>{classrooms.classroomID}</td>  */}
                         <td>{classrooms.classroomName}</td>
                        <td>
     <ButtonToolbar>

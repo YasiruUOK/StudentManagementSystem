@@ -43,6 +43,7 @@ export default class Teacher extends Component {
             this.setState({
                 //teachers: response.data
             });
+            this.refreshList();
             //console.log(response.data);
           })
           .catch(e => {
@@ -53,25 +54,29 @@ export default class Teacher extends Component {
     render(){
         
         const {teachers, teacherid, firstname, lastname, contactno, emailaddress} = this.state;
-        let addModalClose =() => this.setState({addModalShow:false});
-        let editModalClose =() => this.setState({editModalShow:false});
+        let addModalClose =() => {this.setState({addModalShow:false})
+        this.refreshList();
+        };
+        let editModalClose =() => {this.setState({editModalShow:false})
+        this.refreshList();
+        };
     
             return(
                 <div>
                 <Table className="mt-4" striped bordered hover size="sm">
                 <thead>
                     <tr>
-                        <th>teacherID</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>contactNo</th>
-                        <th>emailAddress</th>
+                        {/* <th>teacherID</th> */}
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact No</th>
+                        <th>Email Address</th>
                     </tr>
                 </thead>
                 <tbody>
                     {teachers.map(teachers=>
                        <tr key ={teachers.teacherID}>
-                        <td>{teachers.teacherID}</td> 
+                        {/* <td>{teachers.teacherID}</td>  */}
                         <td>{teachers.firstName}</td>
                         <td>{teachers.lastName}</td>
                         <td>{teachers.contactNo}</td>

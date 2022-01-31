@@ -29,6 +29,7 @@ export class EditSubjectModal extends Component{
             this.setState({
                 subjects: response.data
             });
+            alert("Subject edited successfully!");
             //console.log(response.data);
           })
           .catch(e => {

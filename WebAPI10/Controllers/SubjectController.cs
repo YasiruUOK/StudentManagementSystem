@@ -40,10 +40,10 @@ namespace WebAPI10.Controllers
             return Ok(result);
         }
 
-        [HttpDelete(("{classroomid:int}"))]
-        public ActionResult<int> DeleteSubject(int subjectid)
+        [HttpDelete(("{subjectID:int}"))]
+        public ActionResult<int> DeleteSubject(int subjectID)
         {
-            var result = _repository.DeleteSubject(subjectid);
+            var result = _repository.DeleteSubject(subjectID);
             return Ok(result);
         }
     }

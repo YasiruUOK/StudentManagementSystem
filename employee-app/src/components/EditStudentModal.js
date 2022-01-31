@@ -4,18 +4,33 @@ import {Modal, Button, Row, Col, Form} from 'react-bootstrap';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import StudentDataService from "../services/student.service";
+import ClassRoomDataService from "../services/classroom.service";
 
 export class EditStudentModal extends Component{
 
     constructor(props){
         super(props);
-        this.state = {snackbaropen: false, snackbarmsg: ''};
+        this.state = {snackbaropen: false, snackbarmsg: '', existingClassroomList: []};
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.getClassRoomList();
     }
 
     snackbarClose = (event) =>{
         this.setState({snackbaropen:false});
       };
+
+      getClassRoomList() {
+        ClassRoomDataService.getAll()
+          .then(response => {
+            this.setState({
+              classrooms: response.data,
+              existingClassroomList: response.data
+            });
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      }
 
       handleSubmit(event){
         event.preventDefault();
@@ -34,6 +49,7 @@ export class EditStudentModal extends Component{
             this.setState({
                 students: response.data
             });
+            alert("Student edited successfully!");
             //console.log(response.data);
           })
           .catch(e => {
@@ -132,7 +148,7 @@ onClick={this.snackbarClose}
               <Form.Group controlId="contactNo">
               <Form.Label>ContactNo</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 name="contactno"
                 required
                 defaultValue = {this.props.contactno}
@@ -143,7 +159,7 @@ onClick={this.snackbarClose}
               <Form.Group controlId="emailAddress">
               <Form.Label>EmailAddress</Form.Label>
               <Form.Control
-                type="text"
+                type="email"
                 name="emailaddress"
                 required
                 defaultValue = {this.props.emailaddress}
@@ -161,6 +177,26 @@ onClick={this.snackbarClose}
                 placeholder="DateOfbirth"
                />
               </Form.Group>
+
+              {/* <Form.Group controlId="DateOfbirth">
+                    <Form.Label>Class Room</Form.Label>
+                    <br></br>
+                    <select aria-label="Default select example" name="classroom" >
+                      {this.state.existingClassroomList.map((item) => (
+                        <option key={item.classroomID} onClick={() => {
+                          this.setState(
+                            {
+                              classRoomID: item.classroomID,
+                              classRoomName: item.classroomName,
+                              classRoomError: "",
+                            }
+                          );
+                        }} value={item.classroomID}> 
+                          {item.classroomName}
+                        </option>
+                      ))}
+                    </select>
+                  </Form.Group> */}
 
               <Form.Group>
                   <Button variant="primary" type="submit">

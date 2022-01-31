@@ -36,6 +36,7 @@ export class AddTeacherModal extends Component {
         this.setState({
           teachers: response.data
         });
+        alert("Teacher added successfully!");
         //console.log(response.data);
       })
       .catch(e => {
@@ -106,7 +107,7 @@ export class AddTeacherModal extends Component {
                   <Form.Group controlId="ContactNo">
                     <Form.Label>ContactNo</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="number"
                       name="ContactNo"
                       required
                       placeholder="ContactNo"
@@ -117,7 +118,7 @@ export class AddTeacherModal extends Component {
                   <Form.Group controlId="EmailAddress">
                     <Form.Label>EmailAddress</Form.Label>
                     <Form.Control
-                      type="text"
+                      type="email"
                       name="EmailAddress"
                       required
                       placeholder="EmailAddress"

@@ -43,6 +43,7 @@ export default class Subject extends Component {
             this.setState({
                 //subjects: response.data
             });
+            this.refreshList();
             //console.log(response.data);
           })
           .catch(e => {
@@ -53,22 +54,24 @@ export default class Subject extends Component {
     render(){
         
         const {subjects, subjectid, subjectname} = this.state;
-        let addModalClose =() => this.setState({addModalShow:false});
-        let editModalClose =() => this.setState({editModalShow:false});
+        let addModalClose =() => {this.setState({addModalShow:false})
+        this.refreshList();};
+        let editModalClose =() => {this.setState({editModalShow:false})
+        this.refreshList();};
     
             return(
                 <div>
                 <Table className="mt-4" striped bordered hover size="sm">
                 <thead>
                     <tr>
-                        <th>subjectID</th>
+                        {/* <th>subjectID</th> */}
                         <th>Subject Name</th>
                     </tr>
                 </thead>
                 <tbody>
                     {subjects.map(subjects=>
                        <tr key ={subjects.subjectID}>
-                        <td>{subjects.subjectID}</td> 
+                        {/* <td>{subjects.subjectID}</td>  */}
                         <td>{subjects.subjectName}</td>
                        <td>
     <ButtonToolbar>

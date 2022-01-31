@@ -30,7 +30,6 @@ export default class AllocateClassRoom extends Component {
                     classrooms: response.data
 
                 });
-                console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -62,7 +61,9 @@ export default class AllocateClassRoom extends Component {
                     this.setState({
                         //subjects: response.data
                     });
-                    this.getTeacherNameList();
+                    var selectedTeacherID = document.getElementById("teacherList").value;
+                    this.getAllocatedClassRoomList(selectedTeacherID)
+                    //this.getTeacherNameList();
                     //console.log(response.data);
                 })
                 .catch(e => {
@@ -85,7 +86,7 @@ export default class AllocateClassRoom extends Component {
                     classrooms: response.data
 
                 });
-                console.log(response.data);
+                //console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
@@ -111,8 +112,8 @@ export default class AllocateClassRoom extends Component {
           classroomID: parseInt(document.getElementById("classroomList").value),
           teacherID: parseInt(document.getElementById("teacherList").value)
         };
-        console.log("classroomID "+data.classroomID);
-        console.log("teacherID "+data.teacherID);
+        // console.log("classroomID "+data.classroomID);
+        // console.log("teacherID "+data.teacherID);
         allocateclassroomService.create(data)
           .then(response => {
             this.setState({
@@ -189,30 +190,26 @@ export default class AllocateClassRoom extends Component {
                 <Table className="mt-4" striped bordered hover size="sm">
                     <thead>
                         <tr>
-                            <th>Allowcated classroomID</th>
-                            <th>classroomID</th>
                             <th>ClassRoom Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         {classrooms.map(classrooms =>
                             <tr key={classrooms.allocateClassroomID}>
-                                <td>{classrooms.allocateClassroomID}</td>
-                                <td>{classrooms.classroomID}</td>
                                 <td>{classrooms.classroomName}</td>
                                 <td>
                                     <ButtonToolbar>
-                                        <Button
+                                        {/* <Button
                                             className="mr-2" variant="info"
                                             onClick={() => this.setState({ editModalShow: true, classroomid: classrooms.classroomID, classroomname: classrooms.classroomName })}
                                         >
                                             Edit
-                                        </Button>
+                                        </Button> */}
 
                                         <Button className="mr-2"
                                             onClick={() => this.deleteAllocateClassroomDataService(classrooms.allocateClassroomID)}
                                             variant="danger"
-                                        >Delete</Button>
+                                        >Deallocate</Button>
 
                                         <EditSubjectModal
                                             show={this.state.editModalShow}

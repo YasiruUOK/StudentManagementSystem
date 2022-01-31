@@ -31,6 +31,7 @@ export class AddClassRoomModal extends Component {
             this.setState({
                 students: response.data
             });
+            alert("Classroom added successfully!");
           })
           .catch(e => {
             console.log(e);
